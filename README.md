@@ -22,3 +22,8 @@ O objetivo principal é desenvolver uma aplicação que permita:
 - JavaScript
 - HTML / CSS
 - Git & GitHub
+
+
+## Link do Figma:
+
+https://www.figma.com/design/z4YP4GTonVJ4jjQ1PFZfIC/Livrarium-Oficial?node-id=0-1&p=f&t=TyTtkGISSRqsHDvq-0
