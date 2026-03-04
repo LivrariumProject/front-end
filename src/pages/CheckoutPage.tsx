@@ -84,13 +84,16 @@ export function CheckoutPage() {
             <span>R$ {item.price.toFixed(2)}</span>
           </div>
         ))}
-        <div className="summary-line total"><span>Total</span><span>R$ {total.toFixed(2)}</span></div>
+        <div className="summary-line total">
+          <span>Total</span>
+          <span>R$ {total.toFixed(2)}</span>
+        </div>
       </div>
 
       {error ? <div className="feedback-box error-box">{error}</div> : null}
 
       <button type="submit" disabled={loading || items.length === 0}>
-        {loading ? 'Processando...' : 'Confirmar pedido'}
+        {loading ? 'Finalizando...' : 'Finalizar pedido'}
       </button>
     </form>
   );

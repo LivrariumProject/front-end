@@ -5,8 +5,7 @@ import { useCart } from '../context/CartContext';
 export function CartPage() {
   const { items, removeItem, subtotal } = useCart();
   const navigate = useNavigate();
-  const tax = subtotal * 0.1;
-  const total = subtotal + tax;
+  const total = subtotal;
 
   if (items.length === 0) {
     return <EmptyState title="Carrinho vazio" description="Adicione livros do catálogo para continuar." />;
@@ -34,8 +33,7 @@ export function CartPage() {
 
       <aside className="panel">
         <h2>Resumo</h2>
-        <div className="summary-line"><span>Subtotal</span><span>R$ {subtotal.toFixed(2)}</span></div>
-        <div className="summary-line"><span>Taxa</span><span>R$ {tax.toFixed(2)}</span></div>
+        <div className="summary-line"><span>Itens</span><span>{items.length}</span></div>
         <div className="summary-line total"><span>Total</span><span>R$ {total.toFixed(2)}</span></div>
         <button onClick={() => navigate('/checkout')}>Ir para checkout</button>
         <Link to="/">Continuar comprando</Link>

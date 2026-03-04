@@ -9,10 +9,12 @@ export const userService = {
 
   async signup(payload: Omit<User, 'id' | 'role'>): Promise<User> {
     try {
-      const response = await api.post<ApiItemResponse<User>>('/users', payload);
-      const createdUser = unwrapItemResponse(response.data);
+      try {
+        await api.post<ApiItemResponse<User>>('/register', payload);
+      } catch {
+        await api.post<ApiItemResponse<User>>('/users', payload);
+      }
 
-      // Faz login em seguida para obter o token JWT do backend.
       return await authService.login(payload.email, payload.password ?? '');
     } catch (error) {
       const isMockMode = import.meta.env.DEV;
