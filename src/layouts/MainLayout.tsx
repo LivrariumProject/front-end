@@ -13,11 +13,13 @@ interface MainLayoutProps {
 export function MainLayout({ user, search, onSearchChange, onLogout }: MainLayoutProps) {
   return (
     <div>
-      <Header user={user} search={search} onSearchChange={onSearchChange} onLogout={onLogout} />
-      <NavTabs />
+      <Header user={user} onLogout={onLogout} />
+      <NavTabs search={search} onSearchChange={onSearchChange} />
+
       <main className="page-container">
         <Outlet />
       </main>
+
       <footer className="footer">© 2026 Livrarium</footer>
     </div>
   );

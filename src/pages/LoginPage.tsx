@@ -29,37 +29,47 @@ export function LoginPage({ onLogin }: LoginPageProps) {
   }
 
   return (
-    <div className="auth-wrapper">
-      <form className="auth-card" onSubmit={handleSubmit}>
-        <h1>Bem-vindo</h1>
-        <p>Entre com email e senha cadastrados no backend.</p>
+    <div className="auth-split">
+      <div className="auth-left">
+        <img src="/livrarium-icon.png" alt="Livrarium" />
+        <div className="auth-slogan">Sua próxima leitura começa aqui.</div>
+        <div className="auth-sub">
+          Explore o catálogo, compre ou alugue livros digitais e acompanhe tudo na sua biblioteca.
+        </div>
+      </div>
 
-        <label>Email</label>
-        <input
-          type="email"
-          required
-          value={form.email}
-          onChange={(event) => setForm((current) => ({ ...current, email: event.target.value }))}
-        />
+      <div className="auth-right">
+        <form className="auth-card" onSubmit={handleSubmit}>
+          <h1>Bem-vindo</h1>
+          <p>Entre com email e senha cadastrados no backend.</p>
 
-        <label>Senha</label>
-        <input
-          type="password"
-          required
-          value={form.password}
-          onChange={(event) => setForm((current) => ({ ...current, password: event.target.value }))}
-        />
+          <label>Email</label>
+          <input
+            type="email"
+            required
+            value={form.email}
+            onChange={(event) => setForm((current) => ({ ...current, email: event.target.value }))}
+          />
 
-        {error ? <div className="feedback-box error-box">{error}</div> : null}
+          <label>Senha</label>
+          <input
+            type="password"
+            required
+            value={form.password}
+            onChange={(event) => setForm((current) => ({ ...current, password: event.target.value }))}
+          />
 
-        <button type="submit" disabled={loading}>
-          {loading ? 'Entrando...' : 'Entrar'}
-        </button>
+          {error ? <div className="feedback-box error-box">{error}</div> : null}
 
-        <span>
-          Não tem conta? <Link to="/signup">Cadastre-se</Link>
-        </span>
-      </form>
+          <button type="submit" disabled={loading}>
+            {loading ? 'Entrando...' : 'Entrar'}
+          </button>
+
+          <span>
+            Não tem conta? <Link to="/signup">Cadastre-se</Link>
+          </span>
+        </form>
+      </div>
     </div>
   );
 }

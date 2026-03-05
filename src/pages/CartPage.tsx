@@ -24,7 +24,7 @@ export function CartPage() {
               </p>
               <strong>R$ {item.price.toFixed(2)}</strong>
             </div>
-            <button className="secondary" onClick={() => removeItem(item.id)}>
+            <button className="remove" onClick={() => removeItem(item.id)}>
               Remover
             </button>
           </div>
@@ -35,8 +35,13 @@ export function CartPage() {
         <h2>Resumo</h2>
         <div className="summary-line"><span>Itens</span><span>{items.length}</span></div>
         <div className="summary-line total"><span>Total</span><span>R$ {total.toFixed(2)}</span></div>
-        <button onClick={() => navigate('/checkout')}>Ir para checkout</button>
-        <Link to="/">Continuar comprando</Link>
+        <div className="checkout-actions">
+          <button className="checkout" onClick={() => navigate('/checkout')}>
+            Ir para checkout
+          </button>
+
+          <Link to="/">Continuar comprando</Link>
+        </div>
       </aside>
     </div>
   );

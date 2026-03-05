@@ -29,45 +29,55 @@ export function SignupPage({ onSignup }: SignupPageProps) {
   }
 
   return (
-    <div className="auth-wrapper">
-      <form className="auth-card" onSubmit={handleSubmit}>
-        <h1>Criar conta</h1>
-        <p>Cadastro conectado ao endpoint de usuários e login automático.</p>
+    <div className="auth-split">
+      <div className="auth-left">
+        <img src="/livrarium-icon.png" alt="Livrarium" />
+        <div className="auth-slogan">Sua próxima leitura começa aqui.</div>
+        <div className="auth-sub">
+          Explore o catálogo, compre ou alugue livros digitais e acompanhe tudo na sua biblioteca.
+        </div>
+      </div>
 
-        <label>Nome</label>
-        <input
-          type="text"
-          required
-          value={form.name}
-          onChange={(event) => setForm((current) => ({ ...current, name: event.target.value }))}
-        />
+      <div className="auth-right">
+        <form className="auth-card" onSubmit={handleSubmit}>
+          <h1>Criar conta</h1>
+          <p>Cadastro conectado ao endpoint de usuários e login automático.</p>
 
-        <label>Email</label>
-        <input
-          type="email"
-          required
-          value={form.email}
-          onChange={(event) => setForm((current) => ({ ...current, email: event.target.value }))}
-        />
+          <label>Nome</label>
+          <input
+            type="text"
+            required
+            value={form.name}
+            onChange={(event) => setForm((current) => ({ ...current, name: event.target.value }))}
+          />
 
-        <label>Senha</label>
-        <input
-          type="password"
-          required
-          value={form.password}
-          onChange={(event) => setForm((current) => ({ ...current, password: event.target.value }))}
-        />
+          <label>Email</label>
+          <input
+            type="email"
+            required
+            value={form.email}
+            onChange={(event) => setForm((current) => ({ ...current, email: event.target.value }))}
+          />
 
-        {error ? <div className="feedback-box error-box">{error}</div> : null}
+          <label>Senha</label>
+          <input
+            type="password"
+            required
+            value={form.password}
+            onChange={(event) => setForm((current) => ({ ...current, password: event.target.value }))}
+          />
 
-        <button type="submit" disabled={loading}>
-          {loading ? 'Criando conta...' : 'Criar conta'}
-        </button>
+          {error ? <div className="feedback-box error-box">{error}</div> : null}
 
-        <span>
-          Já tem conta? <Link to="/login">Entrar</Link>
-        </span>
-      </form>
+          <button type="submit" disabled={loading}>
+            {loading ? 'Criando conta...' : 'Criar conta'}
+          </button>
+
+          <span>
+            Já tem conta? <Link to="/login">Entrar</Link>
+          </span>
+        </form>
+      </div>
     </div>
   );
 }
