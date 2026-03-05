@@ -1,0 +1,669 @@
+:root {
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: #1f2937;
+  background: #f5f5f5;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #f5f5f5;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button {
+  background: #111827;
+  color: white;
+  border: 0;
+  border-radius: 8px;
+  padding: 0.8rem 1rem;
+  cursor: pointer;
+}
+
+button.secondary,
+.ghost-button {
+  background: white;
+  color: #111827;
+  border: 1px solid #d1d5db;
+}
+
+input,
+select {
+  width: 100%;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 0.8rem 0.9rem;
+  background: white;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+}
+
+.header {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1rem;
+  align-items: center;
+  background: white;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid #e5e7eb;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.logo-button {
+  background: transparent;
+  color: #111827;
+  padding: 0;
+  text-align: left;
+  font-size: 1.4rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logo-icon {
+  font-size: 1.2rem;
+}
+
+.nav-tabs {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0 2rem;
+  background: white;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.nav-tabs-left {
+  display: flex;
+  gap: 1.5rem;
+  flex: 0 0 auto; /* não estica */
+}
+
+.logo-img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+}
+
+/* a busca pega todo o espaço disponível */
+.nav-search {
+  flex: 1;          /* ocupa o resto */
+  width: auto;      /* não limita */
+  min-width: 280px; /* opcional, evita ficar muito pequena */
+}
+
+.nav-tabs-left {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-search {
+  width: min(520px, 100%);
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 0.8rem 0.9rem;
+  background: white;
+}
+
+.logo-button {
+  background: transparent;
+  color: #111827;
+  padding: 0;
+  text-align: left;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.search-input {
+  max-width: 100%;
+}
+
+.header-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.nav-tabs {
+  display: flex;
+  gap: 1.5rem;
+  padding: 0 2rem;
+  background: white;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.nav-tabs a {
+  padding: 1rem 0;
+  color: #6b7280;
+  border-bottom: 2px solid transparent;
+}
+
+.page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.hero-card,
+.panel,
+.detail-card,
+.filters-panel,
+.feedback-box,
+.auth-card {
+  background: white;
+  border-radius: 16px;
+  border: 1px solid #e5e7eb;
+}
+
+.hero-card {
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.filters-panel {
+  padding: 1rem;
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.filters-panel > div {
+  min-width: 180px;
+}
+
+.books-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.compact-grid {
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+
+.book-card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.book-cover,
+.detail-cover-large {
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, #e5e7eb, #f3f4f6);
+}
+
+.book-cover {
+  min-height: 220px;
+  font-size: 3rem;
+}
+
+.detail-cover-large {
+  min-height: 360px;
+  font-size: 5rem;
+  border-radius: 16px;
+}
+
+.book-info {
+  padding: 1rem;
+  display: grid;
+  gap: 0.6rem;
+}
+
+.book-info h3,
+.panel h2,
+.auth-card h1,
+.detail-card h1 {
+  margin: 0;
+}
+
+.book-actions-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.detail-card {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.detail-description,
+.muted {
+  color: #6b7280;
+}
+
+.detail-options {
+  display: flex;
+  gap: 0.75rem;
+  margin: 1rem 0;
+  flex-wrap: wrap;
+}
+
+.detail-options button.active {
+  background: #111827;
+  color: white;
+}
+
+.inline-field {
+  max-width: 240px;
+  margin-bottom: 1rem;
+}
+
+.cart-layout {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 1rem;
+}
+
+.panel {
+  padding: 1.5rem;
+}
+
+.cart-item,
+.summary-line {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.summary-line.total {
+  font-weight: 700;
+}
+
+.checkout-form,
+.profile-form {
+  max-width: 720px;
+  margin: 0 auto;
+  display: grid;
+  gap: 1rem;
+}
+
+.order-box {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 0 1rem;
+}
+
+.history-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.history-table th,
+.history-table td {
+  text-align: left;
+  padding: 0.9rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.feedback-box {
+  padding: 2rem;
+  text-align: center;
+}
+
+.auth-wrapper {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+}
+
+.auth-card {
+  width: min(100%, 420px);
+  padding: 2rem;
+  display: grid;
+  gap: 0.8rem;
+}
+
+.footer {
+  padding: 2rem;
+  text-align: center;
+  color: #6b7280;
+}
+
+/* Hover/animação para itens do menu superior direito */
+.header-actions a,
+.header-actions button {
+  transition: transform 160ms ease, opacity 160ms ease, background-color 160ms ease, box-shadow 160ms ease;
+  border-radius: 10px;
+}
+
+.header-actions a:hover,
+.header-actions button:hover {
+  transform: translateY(-2px);
+  opacity: 0.92;
+  background-color: rgba(0,0,0,0.05);
+}
+
+/* Hover/animação para botões de Comprar/Alugar */
+.book-actions-row button {
+  transition: transform 160ms ease, filter 160ms ease, box-shadow 160ms ease;
+  will-change: transform;
+}
+
+.book-actions-row button:hover {
+  transform: translateY(-2px) scale(1.02);
+  filter: brightness(0.98);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.10);
+}
+
+.book-actions-row button:active {
+  transform: translateY(0) scale(0.99);
+}
+
+/* Botão Remover no carrinho (menor e vermelho) */
+.cart-item button.remove {
+  background: #e53935;
+  padding: 0.35rem 0.55rem;
+  font-size: 0.8rem;
+  border-radius: 8px;
+}
+
+.cart-item button.remove:hover {
+  filter: brightness(0.95);
+  transform: translateY(-1px);
+}
+
+/* Botão checkout em verde */
+button.checkout {
+  background: #2e7d32;
+}
+
+button.checkout:hover {
+  filter: brightness(0.97);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 18px rgba(0,0,0,0.12);
+}
+
+/* Menu superior direito: animação no hover */
+.header-actions a {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.55rem 0.75rem;
+  border-radius: 10px;
+  transition: transform 160ms ease, background-color 160ms ease, box-shadow 160ms ease, opacity 160ms ease;
+}
+
+.header-actions a:hover {
+  transform: translateY(-2px);
+  background-color: rgba(17, 24, 39, 0.06);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+  opacity: 0.95;
+}
+
+/* Botão "Sair" (ghost-button) também com animação */
+.header-actions button {
+  transition: transform 160ms ease, filter 160ms ease, box-shadow 160ms ease;
+}
+
+.header-actions button:hover {
+  transform: translateY(-2px);
+  filter: brightness(0.98);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+}
+
+/* =========================
+   Header (menu superior direito) - hover
+========================= */
+.header-actions a {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.55rem 0.75rem;
+  border-radius: 10px;
+  transition: transform 160ms ease, background-color 160ms ease, box-shadow 160ms ease, opacity 160ms ease;
+}
+
+.header-actions a:hover {
+  transform: translateY(-2px);
+  background-color: rgba(17, 24, 39, 0.06);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+  opacity: 0.95;
+}
+
+.header-actions button {
+  transition: transform 160ms ease, filter 160ms ease, box-shadow 160ms ease;
+}
+
+.header-actions button:hover {
+  transform: translateY(-2px);
+  filter: brightness(0.98);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+}
+
+/* =========================
+   Botões Comprar/Alugar (cards do catálogo) - hover
+========================= */
+.book-actions-row button {
+  transition: transform 160ms ease, filter 160ms ease, box-shadow 160ms ease;
+  will-change: transform;
+}
+
+.book-actions-row button:hover {
+  transform: translateY(-2px) scale(1.02);
+  filter: brightness(0.98);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.10);
+}
+
+.book-actions-row button:active {
+  transform: translateY(0) scale(0.99);
+}
+
+/* =========================
+   Botões Comprar/Alugar (detail page) - hover
+========================= */
+.detail-options button {
+  transition: transform 160ms ease, filter 160ms ease, box-shadow 160ms ease;
+  will-change: transform;
+}
+
+.detail-options button:hover {
+  transform: translateY(-2px);
+  filter: brightness(0.98);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.10);
+}
+
+.detail-options button:active {
+  transform: translateY(0);
+}
+
+/* =========================
+   Carrinho: Remover menor e vermelho
+========================= */
+.cart-item button.remove {
+  background: #e53935;
+  color: #fff;
+  border: 0;
+  padding: 0.35rem 0.55rem;
+  font-size: 0.8rem;
+  border-radius: 8px;
+  transition: transform 140ms ease, filter 140ms ease;
+}
+
+.cart-item button.remove:hover {
+  filter: brightness(0.95);
+  transform: translateY(-1px);
+}
+
+.cart-item button.remove:active {
+  transform: translateY(0);
+}
+
+/* =========================
+   Carrinho: checkout verde
+========================= */
+button.checkout {
+  background: #2e7d32;
+  color: #fff;
+  transition: transform 160ms ease, filter 160ms ease, box-shadow 160ms ease;
+}
+
+button.checkout:hover {
+  filter: brightness(0.97);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 18px rgba(0,0,0,0.12);
+}
+
+button.checkout:active {
+  transform: translateY(0);
+}
+
+.checkout-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* empurra o link pra direita */
+  gap: 14px;
+  margin-top: 12px;
+}
+
+.checkout-actions a {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.55rem 0.75rem;
+  border-radius: 10px;
+}
+
+/* NavTabs (Catálogo / Minha Biblioteca / Histórico / Minha Conta) - hover/animação */
+.nav-tabs a {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.9rem 0.75rem; /* mantém altura do tab */
+  
+  transition: transform 160ms ease, background-color 160ms ease, box-shadow 160ms ease, opacity 160ms ease;
+}
+
+.nav-tabs a:hover {
+  transform: translateY(-2px);
+  background-color: rgba(17, 24, 39, 0.06);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+  opacity: 0.95;
+}
+
+/* mantém o underline do ativo funcionando */
+.nav-tabs a.active {
+  box-shadow: none;
+  transform: none;
+}
+
+/* item ativo (rota atual) */
+.nav-tabs a[aria-current="page"] {
+  background: #5c6675;   /* cinza escuro */
+  color: #f9fafb;        /* texto claro */
+  box-shadow: none;
+  opacity: 1;
+  transform: none;
+}
+
+/* opcional: hover do ativo levemente mais claro */
+.nav-tabs a[aria-current="page"]:hover {
+  background: #4b5563;
+}
+
+/* Auth dividido: esquerda ~35%, direita restante */
+.auth-split {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 35% 65%;
+  background: #f5f5f5;
+}
+
+.auth-left {
+  display: grid;
+  align-content: start;      /* não fica centralizado */
+  justify-items: center;
+  gap: 14px;
+  padding: 2rem 1.5rem;
+  background: white;
+  border-right: 1px solid #e5e7eb;
+}
+
+.auth-left img {
+  width: min(220px, 70%);
+  height: auto;
+  object-fit: contain;
+  margin-top: 10vh;          /* desce um pouco sem ficar “no meio” */
+}
+
+.auth-left .auth-slogan {
+  max-width: 320px;
+  text-align: center;
+  color: #374151;
+  line-height: 1.4;
+  font-weight: 600;
+}
+
+.auth-left .auth-sub {
+  max-width: 320px;
+  text-align: center;
+  color: #6b7280;
+  line-height: 1.45;
+  font-size: 0.95rem;
+}
+
+.auth-right {
+  display: grid;
+  place-items: center;
+  padding: 2rem;
+}
+
+.auth-right .auth-card {
+  width: min(100%, 420px);
+}
+
+/* Checkout: botão "Finalizar pedido" fica verde no hover */
+.checkout-form button[type="submit"]:hover:not(:disabled) {
+  background: #2e7d32;
+}
+
+.checkout-form button[type="submit"] {
+  transition: background-color 160ms ease, transform 160ms ease, box-shadow 160ms ease, filter 160ms ease;
+}
+
+.checkout-form button[type="submit"]:hover:not(:disabled) {
+  background: #2e7d32;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 18px rgba(0,0,0,0.12);
+}
+
+@media (max-width: 900px) {
+  .header {
+    grid-template-columns: 1fr;
+  }
+
+  .cart-layout,
+  .detail-card {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .nav-tabs {
+    overflow-x: auto;
+  }
+}
