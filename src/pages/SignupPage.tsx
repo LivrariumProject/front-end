@@ -36,6 +36,11 @@ export function SignupPage({ onSignup }: SignupPageProps) {
         <div className="auth-sub">
           Explore o catálogo, compre ou alugue livros digitais e acompanhe tudo na sua biblioteca.
         </div>
+        <div className="auth-highlight">
+          <span className="auth-pill">Cadastro rápido</span>
+          <span className="auth-pill">Acesso imediato</span>
+          <span className="auth-pill">Descubra novos títulos</span>
+        </div>
       </div>
 
       <div className="auth-right">
