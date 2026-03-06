@@ -14,6 +14,10 @@ import { bookService } from './services/bookService';
 import { authService } from './services/authService';
 import { Loading } from './components/Loading';
 import type { Book, User } from './types';
+import { RequireAuth } from './components/RequireAuth';
+import { RequireAdmin } from './components/RequireAdmin';
+import { AdminBooksPage } from './pages/admin/AdminBooksPage';
+import { AdminPurchasesPage } from './pages/admin/AdminPurchasesPage';
 
 export default function App() {
   const [user, setUser] = useState<User | null>(authService.getStoredUser());
@@ -23,7 +27,7 @@ export default function App() {
 
   useEffect(() => {
     async function loadBooks() {
-      const data = await bookService.getAll();
+      const data = await bookService.getAvailable()
       setBooks(data);
       setLoading(false);
     }
@@ -56,13 +60,19 @@ export default function App() {
         <Route index element={<HomePage books={books} search={search} />} />
         <Route path="books/:id" element={<BookDetailPage />} />
         <Route path="cart" element={<CartPage />} />
-        <Route path="checkout" element={<CheckoutPage />} />
-        <Route path="library" element={<LibraryPage />} />
-        <Route path="history" element={<HistoryPage />} />
-        <Route path="profile" element={<ProfilePage />} />
-      </Route>
 
-      <Route path="*" element={<Navigate to="/" replace />} />
+        <Route element={<RequireAuth />}>
+          <Route path="checkout" element={<CheckoutPage />} />
+          <Route path="library" element={<LibraryPage />} />
+          <Route path="history" element={<HistoryPage />} />
+          <Route path="profile" element={<ProfilePage />} />
+        </Route>
+
+        <Route element={<RequireAdmin />}>
+          <Route path="admin/books" element={<AdminBooksPage />} />
+          <Route path="admin/purchases" element={<AdminPurchasesPage />} />
+        </Route>
+      </Route>
     </Routes>
   );
 }

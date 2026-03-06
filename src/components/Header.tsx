@@ -12,17 +12,16 @@ export function Header({ user, onLogout }: HeaderProps) {
   return (
     <header className="header">
     <button className="logo-button" onClick={() => navigate('/')}>
-      <img src="livro.png" alt="Logo Livrarium" className="logo-img" />
+      <img src="/livro.png" alt="Logo Livrarium" className="logo-img" />
       <span>Livrarium</span>
     </button>
 
       <div className="header-actions">
         {user ? (
           <>
+            <span className="header-user">{user.name}</span>
             <Link to="/profile">Perfil</Link>
-            <button className="ghost-button" onClick={onLogout}>
-              Sair
-            </button>
+            <button className="ghost-button" onClick={onLogout}>Sair</button>
           </>
         ) : (
           <Link to="/login">Entrar</Link>

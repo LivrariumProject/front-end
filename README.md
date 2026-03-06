@@ -1,4 +1,4 @@
-# 📚 Livrarium Project — Frontend 
+# 📚 Livrarium Project — Frontend
 
 O **Livrarium Project — Frontend** é a interface web da plataforma de livraria digital **Livrarium**, desenvolvida para facilitar a **compra** e o **aluguel** de livros digitais. Este frontend consome a **API REST** do backend do sistema, oferecendo uma interface simples para:
 - autenticação,
@@ -10,12 +10,12 @@ O **Livrarium Project — Frontend** é a interface web da plataforma de livrari
 - histórico
 - perfil.
 
-Projeto desenvolvido como parte da disciplina **Princípios de Desenvolvimento Web** (Ciência da Computação). 
+Projeto desenvolvido como parte da disciplina **Princípios de Desenvolvimento Web** (Ciência da Computação).
 
 ## 🎨 Protótipo (Figma)
-https://www.figma.com/design/z4YP4GTonVJ4jjQ1PFZfIC/Livrarium-Oficial?node-id=0-1&p=f&t=TyTtkGISSRqsHDvq-0 --- 
+https://www.figma.com/design/z4YP4GTonVJ4jjQ1PFZfIC/Livrarium-Oficial?node-id=0-1&p=f&t=TyTtkGISSRqsHDvq-0
 
-## 🚀 Objetivo do Projeto Permitir que o usuário: 
+## 🚀 Objetivo do Projeto Permitir que o usuário:
 
 - criar conta e fazer login;
 - visualizar o catálogo de livros;
@@ -27,15 +27,16 @@ https://www.figma.com/design/z4YP4GTonVJ4jjQ1PFZfIC/Livrarium-Oficial?node-id=0-
 - consultar histórico de compras e aluguéis;
 - visualizar e editar informações do perfil.
 
-## 🛠️ Tecnologias Utilizadas 
+## 🛠️ Tecnologias Utilizadas
 - **React**
 - **TypeScript**
 - **Vite**
 - **React Router DOM**
 - **Axios**
 - **CSS**
-- 
-## 🔗 Integração com o Backend ### Endpoints principais utilizados
+
+## 🔗 Integração com o Backend
+### Endpoints principais utilizados
 - `POST /auth/login`
 - `POST /auth/logout`
 - `POST /register`
@@ -46,27 +47,28 @@ https://www.figma.com/design/z4YP4GTonVJ4jjQ1PFZfIC/Livrarium-Oficial?node-id=0-
 - `GET /purchases/user/:userId`
 - `GET /rentals/user/:userId`
 - `PUT /users/:id`
-- > Observação: a aplicação assume que o backend retorna dados no padrão esperado pelos services (ex.: arrays/objetos com `data`, quando aplicável).
 
-## ⚙️ Configuração 
+> Observação: a aplicação assume que o backend retorna dados no padrão esperado pelos services (ex.: arrays/objetos com `data`, quando aplicável).
+
+## ⚙️ Configuração
 ### Pré-requisitos
 - **Node.js 18+**
 - **npm**
 ### Variáveis de ambiente Crie um arquivo
-`.env` na raiz do projeto: ```env VITE_API_BASE_URL=http://localhost:3000 ```
+`.env` na raiz do projeto: ```env VITE_API_BASE_URL=http://localhost:3000```
 
-## ▶️ Como Executar 
-### 1) Instalar dependências 
-```bash npm install ``` 
-### 2) Rodar em modo desenvolvimento 
-```bash npm run dev ``` A aplicação ficará disponível em um endereço semelhante a: - `http://localhost:5173` 
-### 3) Build de produção 
-```bash npm run build ``` 
-### 4) Preview do build 
+## ▶️ Como Executar
+### 1) Instalar dependências
+```bash npm install ```
+### 2) Rodar em modo desenvolvimento
+```bash npm run dev ``` A aplicação ficará disponível em um endereço semelhante a: - `http://localhost:5173`
+### 3) Build de produção
+```bash npm run build ```
+### 4) Preview do build
 ```bash npm run preview ```
 
-## ✅ Como Testar (roteiro rápido) 
-Com o backend rodando e o `.env` configurado: 
+## ✅ Como Testar (roteiro rápido)
+Com o backend rodando e o `.env` configurado:
 1. **Cadastro** - vá em `/signup` - crie um usuário
 2. **Login** - vá em `/login` - autentique com email/senha
 3. **Catálogo** - verifique listagem e filtros
@@ -75,6 +77,8 @@ Com o backend rodando e o `.env` configurado:
 6. **Checkout** - selecione forma de pagamento - finalize pedido
 7. **Histórico** - verifique compras e aluguéis
 8. **Perfil** - edite nome/email e salve Dica: abra o DevTools do navegador (F12) e acompanhe as requisições na aba **Network**.
+
+>User admin: admin@livrarium.com / admin123
 
 ## 🧭 Estrutura do Projeto
 
