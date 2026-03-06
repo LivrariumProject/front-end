@@ -24,6 +24,10 @@ select {
   font: inherit;
 }
 
+.nav-tabs-left {
+  flex-wrap: wrap;
+}
+
 button {
   background: #111827;
   color: white;
@@ -650,6 +654,136 @@ button.checkout:active {
   background: #2e7d32;
   transform: translateY(-1px);
   box-shadow: 0 10px 18px rgba(0,0,0,0.12);
+}
+
+.admin-book-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 1rem 0 1.5rem;
+}
+
+.admin-book-form .full {
+  grid-column: 1 / -1;
+}
+
+.admin-actions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: flex-end;
+}
+
+/* Admin Purchases buttons */
+.btn-small {
+  padding: 0.45rem 0.6rem;
+  font-size: 0.85rem;
+  border-radius: 8px;
+}
+
+.btn-confirm { background: #2e7d32; }
+.btn-fail { background: #b45309; }      /* laranja/âmbar escuro */
+.btn-refund { background: #e53935; }
+.btn-edit { background: #374151; }
+
+.btn-confirm:hover,
+.btn-fail:hover,
+.btn-refund:hover,
+.btn-edit:hover {
+  filter: brightness(0.97);
+  transform: translateY(-1px);
+}
+
+.btn-small {
+  padding: 0.45rem 0.6rem;
+  font-size: 0.85rem;
+  border-radius: 8px;
+}
+
+.btn-danger {
+  background: #e53935;
+  color: #fff;
+  transition: transform 160ms ease, filter 160ms ease, box-shadow 160ms ease;
+}
+
+.btn-danger:hover {
+  filter: brightness(0.95);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 18px rgba(0,0,0,0.12);
+}
+
+.btn-danger:active {
+  transform: translateY(0);
+}
+
+/* Badges (Status) */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  border: 1px solid transparent;
+}
+
+.badge-success {
+  background: rgba(46, 125, 50, 0.12);
+  border-color: rgba(46, 125, 50, 0.25);
+  color: #2e7d32;
+}
+
+.badge-warning {
+  background: rgba(180, 83, 9, 0.12);
+  border-color: rgba(180, 83, 9, 0.25);
+  color: #b45309;
+}
+
+.badge-danger {
+  background: rgba(229, 57, 53, 0.12);
+  border-color: rgba(229, 57, 53, 0.25);
+  color: #e53935;
+}
+
+.badge-muted {
+  background: rgba(107, 114, 128, 0.12);
+  border-color: rgba(107, 114, 128, 0.25);
+  color: #6b7280;
+}
+
+/* Admin Purchases buttons */
+.btn-small {
+  padding: 0.45rem 0.6rem;
+  font-size: 0.85rem;
+  border-radius: 8px;
+}
+
+.btn-confirm { background: #2e7d32; }
+.btn-fail { background: #b45309; }
+.btn-refund { background: #e53935; }
+.btn-edit { background: #374151; }
+
+/* Animação padrão para TODOS os botões */
+button {
+  transition: transform 160ms ease, filter 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+  will-change: transform;
+}
+
+button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  filter: brightness(0.98);
+  box-shadow: 0 10px 18px rgba(0,0,0,0.12);
+}
+
+button:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  box-shadow: none;
+  transform: none;
 }
 
 @media (max-width: 900px) {

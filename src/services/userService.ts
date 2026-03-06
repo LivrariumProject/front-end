@@ -1,6 +1,5 @@
 import { api, getApiErrorMessage, unwrapItemResponse } from './api';
 import { authService } from './authService';
-import { mockUser } from '../data/mock';
 import type { ApiItemResponse, User } from '../types';
 
 export const userService = {
@@ -9,20 +8,17 @@ export const userService = {
 
   async signup(payload: Omit<User, 'id' | 'role'>): Promise<User> {
     try {
+      // tenta /register (backend atual)
       try {
-        await api.post<ApiItemResponse<User>>('/register', payload);
+        await api.post('/register', payload);
       } catch {
-        await api.post<ApiItemResponse<User>>('/users', payload);
+        // fallback opcional caso alguém mova registro para /users
+        await api.post('/users', payload);
       }
 
+      // login após cadastro (precisa de password)
       return await authService.login(payload.email, payload.password ?? '');
     } catch (error) {
-      const isMockMode = import.meta.env.DEV;
-      if (isMockMode) {
-        const fallback = { ...mockUser, ...payload };
-        this.setStoredUser(fallback);
-        return fallback;
-      }
       throw new Error(getApiErrorMessage(error, 'Não foi possível criar a conta.'));
     }
   },
@@ -31,15 +27,11 @@ export const userService = {
     try {
       const response = await api.put<ApiItemResponse<User>>(`/users/${id}`, payload);
       const user = unwrapItemResponse(response.data);
+
+      // preserva dados já salvos (ex.: role) e atualiza com o retorno do backend
       this.setStoredUser({ ...(this.getStoredUser() ?? {}), ...user });
       return user;
     } catch (error) {
-      const isMockMode = import.meta.env.DEV;
-      if (isMockMode) {
-        const merged = { ...(this.getStoredUser() ?? mockUser), ...payload } as User;
-        this.setStoredUser(merged);
-        return merged;
-      }
       throw new Error(getApiErrorMessage(error, 'Não foi possível atualizar o perfil.'));
     }
   }

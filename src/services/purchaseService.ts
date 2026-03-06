@@ -1,5 +1,4 @@
-import { api, unwrapItemResponse, unwrapListResponse } from './api';
-import { mockBooks, mockPurchases } from '../data/mock';
+import { api, getApiErrorMessage, unwrapItemResponse, unwrapListResponse } from './api';
 import type { ApiItemResponse, ApiListResponse, PaymentMethod, Purchase } from '../types';
 
 export const purchaseService = {
@@ -7,36 +6,65 @@ export const purchaseService = {
     try {
       const response = await api.get<ApiListResponse<Purchase>>(`/purchases/user/${userId}`);
       return unwrapListResponse(response.data);
-    } catch {
-      return mockPurchases;
+    } catch (error) {
+      throw new Error(getApiErrorMessage(error, 'Não foi possível carregar as compras.'));
     }
   },
 
-  async createMany(userId: number, items: { bookId: number; paymentMethod: PaymentMethod }[]): Promise<Purchase[]> {
-    const created: Purchase[] = [];
+  async createMany(
+    userId: number,
+    items: { bookId: number; paymentMethod: PaymentMethod }[]
+  ): Promise<Purchase[]> {
+    try {
+      const responses = await Promise.all(
+        items.map((item) =>
+          api.post<ApiItemResponse<Purchase>>('/purchases', {
+            userId,
+            bookId: item.bookId,
+            paymentMethod: item.paymentMethod
+          })
+        )
+      );
 
-    for (const item of items) {
-      try {
-        const response = await api.post<ApiItemResponse<Purchase>>('/purchases', {
-          userId,
-          bookId: item.bookId,
-          paymentMethod: item.paymentMethod
-        });
-        created.push(unwrapItemResponse(response.data));
-      } catch {
-        created.push({
-          id: Date.now() + item.bookId,
-          userId,
-          bookId: item.bookId,
-          price: Number(mockBooks.find((book) => book.id === item.bookId)?.price ?? 0),
-          paymentMethod: item.paymentMethod,
-          paymentStatus: 'completed',
-          purchaseDate: new Date().toISOString(),
-          book: mockBooks.find((book) => book.id === item.bookId)
-        });
-      }
+      return responses.map((r) => unwrapItemResponse(r.data));
+    } catch (error) {
+      throw new Error(getApiErrorMessage(error, 'Não foi possível finalizar as compras.'));
     }
+  },
 
-    return created;
-  }
+  async listAll(): Promise<Purchase[]> {
+    try {
+      const response = await api.get<ApiListResponse<Purchase>>('/purchases');
+      return unwrapListResponse(response.data);
+    } catch (error) {
+      throw new Error(getApiErrorMessage(error, 'Não foi possível carregar todas as compras.'));
+    }
+  },
+
+  async confirm(id: number): Promise<Purchase> {
+    try {
+      const response = await api.patch<ApiItemResponse<Purchase>>(`/purchases/${id}/confirm`);
+      return unwrapItemResponse(response.data);
+    } catch (error) {
+      throw new Error(getApiErrorMessage(error, 'Não foi possível confirmar a compra.'));
+    }
+  },
+
+  async fail(id: number): Promise<Purchase> {
+    try {
+      const response = await api.patch<ApiItemResponse<Purchase>>(`/purchases/${id}/fail`);
+      return unwrapItemResponse(response.data);
+    } catch (error) {
+      throw new Error(getApiErrorMessage(error, 'Não foi possível marcar a compra como falha.'));
+    }
+  },
+
+  async refund(id: number): Promise<Purchase> {
+    try {
+      const response = await api.patch<ApiItemResponse<Purchase>>(`/purchases/${id}/refund`);
+      return unwrapItemResponse(response.data);
+    } catch (error) {
+      throw new Error(getApiErrorMessage(error, 'Não foi possível reembolsar a compra.'));
+    }
+  },
 };

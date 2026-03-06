@@ -8,10 +8,14 @@ export function ProfilePage() {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    if (user) {
-      setForm({ name: user.name, email: user.email });
-    }
-  }, [user]);
+    if (!user) return;
+
+    setForm((current) => {
+      // evita setState desnecessário
+      if (current.name === user.name && current.email === user.email) return current;
+      return { name: user.name, email: user.email };
+    });
+  }, [user?.id]);
 
   async function handleSubmit(event: React.FormEvent) {
     event.preventDefault();

@@ -1,5 +1,4 @@
 import { api, getApiErrorMessage, setStoredToken } from './api';
-import { mockUser } from '../data/mock';
 import type { AuthResponse, User } from '../types';
 
 const USER_KEY = 'livrarium_user';
@@ -29,13 +28,6 @@ export const authService = {
       setStoredUser(response.data.user);
       return response.data.user;
     } catch (error) {
-      const isMockMode = import.meta.env.DEV;
-      if (isMockMode) {
-        const fallback = { ...mockUser, email };
-        setStoredToken('mock-token');
-        setStoredUser(fallback);
-        return fallback;
-      }
       throw new Error(getApiErrorMessage(error, 'Não foi possível fazer login.'));
     }
   },

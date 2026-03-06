@@ -8,6 +8,7 @@ import type { Purchase } from '../types';
 export function LibraryPage() {
   const [items, setItems] = useState<Purchase[]>([]);
   const [loading, setLoading] = useState(true);
+  const [notice, setNotice] = useState<string>('');
 
   useEffect(() => {
     async function load() {
@@ -25,6 +26,10 @@ export function LibraryPage() {
     load();
   }, []);
 
+  function handleRead() {
+    setNotice('A leitura do conteúdo do livro não está disponível nesta versão do projeto.');
+  }
+
   if (loading) return <Loading />;
   if (items.length === 0) {
     return <EmptyState title="Biblioteca vazia" description="Nenhum livro comprado com pagamento concluído ainda." />;
@@ -33,6 +38,13 @@ export function LibraryPage() {
   return (
     <section className="panel">
       <h2>Minha biblioteca</h2>
+
+      {notice ? (
+        <div className="feedback-box" style={{ marginBottom: 12, padding: '1rem' }}>
+          {notice}
+        </div>
+      ) : null}
+
       <div className="books-grid compact-grid">
         {items.map((purchase) => (
           <div className="book-card" key={purchase.id}>
@@ -40,7 +52,9 @@ export function LibraryPage() {
             <div className="book-info">
               <h3>{purchase.book?.title ?? `Livro #${purchase.bookId}`}</h3>
               <p>{purchase.book?.author ?? 'Autor não informado'}</p>
-              <button>Ler</button>
+              <button type="button" onClick={handleRead}>
+                Ler
+              </button>
             </div>
           </div>
         ))}
