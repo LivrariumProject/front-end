@@ -1,7 +1,41 @@
 :root {
   font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   color: #1f2937;
-  background: #f5f5f5;
+  background:
+    radial-gradient(circle at top left, rgba(14, 116, 144, 0.10), transparent 28%),
+    radial-gradient(circle at top right, rgba(180, 83, 9, 0.10), transparent 24%),
+    linear-gradient(180deg, #f8f5ef 0%, #f4efe6 100%);
+
+  --bg-page: #f8f5ef;
+  --bg-page-soft: #f4efe6;
+  --bg-surface: rgba(255, 255, 255, 0.82);
+  --bg-solid: #ffffff;
+
+  --text-main: #1f2937;
+  --text-soft: #6b7280;
+  --text-strong: #123047;
+
+  --border-soft: rgba(148, 163, 184, 0.20);
+  --border-default: #e5e7eb;
+  --border-input: rgba(148, 163, 184, 0.28);
+
+  --brand-primary: #0f766e;
+  --brand-primary-strong: #115e59;
+  --brand-accent: #b45309;
+
+  --danger: #e53935;
+  --success: #2e7d32;
+  --warning: #b45309;
+  --dark-button: #111827;
+  --dark-muted: #374151;
+
+  --shadow-soft: 0 10px 30px rgba(15, 23, 42, 0.08);
+  --shadow-card: 0 18px 40px rgba(15, 23, 42, 0.10);
+  --shadow-hover: 0 10px 18px rgba(0, 0, 0, 0.12);
+  --radius-sm: 8px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
 }
 
 * {
@@ -10,7 +44,11 @@
 
 body {
   margin: 0;
-  background: #f5f5f5;
+  color: var(--text-main);
+  background:
+    linear-gradient(rgba(248, 245, 239, 0.90), rgba(244, 239, 230, 0.92)),
+    url("/library-bg.jpg") center/cover fixed no-repeat;
+  min-height: 100vh;
 }
 
 a {
@@ -24,33 +62,60 @@ select {
   font: inherit;
 }
 
-.nav-tabs-left {
-  flex-wrap: wrap;
-}
-
 button {
-  background: #111827;
+  background: var(--brand-primary);
   color: white;
   border: 0;
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   padding: 0.8rem 1rem;
   cursor: pointer;
+  transition: transform 160ms ease, filter 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+  will-change: transform;
+}
+
+button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  filter: brightness(0.98);
+  box-shadow: var(--shadow-hover);
+}
+
+button:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  box-shadow: none;
+  transform: none;
 }
 
 button.secondary,
 .ghost-button {
-  background: white;
-  color: #111827;
-  border: 1px solid #d1d5db;
+  background: rgba(255, 255, 255, 0.86);
+  color: var(--text-main);
+  border: 1px solid var(--border-soft);
+  backdrop-filter: blur(8px);
 }
 
 input,
 select {
   width: 100%;
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
+  border: 1px solid var(--border-input);
+  border-radius: var(--radius-sm);
   padding: 0.8rem 0.9rem;
-  background: white;
+  background: rgba(255, 255, 255, 0.85);
+  color: var(--text-main);
+  transition: border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: rgba(15, 118, 110, 0.55);
+  box-shadow: 0 0 0 4px rgba(15, 118, 110, 0.12);
+  background: #fff;
 }
 
 label {
@@ -64,17 +129,18 @@ label {
   grid-template-columns: 1fr auto;
   gap: 1rem;
   align-items: center;
-  background: white;
+  background: rgba(255, 255, 255, 0.76);
   padding: 1rem 2rem;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid var(--border-soft);
   position: sticky;
   top: 0;
   z-index: 10;
+  backdrop-filter: blur(12px);
 }
 
 .logo-button {
   background: transparent;
-  color: #111827;
+  color: var(--text-main);
   padding: 0;
   text-align: left;
   font-size: 1.4rem;
@@ -82,25 +148,17 @@ label {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
+  box-shadow: none;
+}
+
+.logo-button:hover:not(:disabled) {
+  background: transparent;
+  filter: none;
+  box-shadow: none;
 }
 
 .logo-icon {
   font-size: 1.2rem;
-}
-
-.nav-tabs {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 0 2rem;
-  background: white;
-  border-bottom: 1px solid #e5e7eb;
-}
-
-.nav-tabs-left {
-  display: flex;
-  gap: 1.5rem;
-  flex: 0 0 auto; /* não estica */
 }
 
 .logo-img {
@@ -109,33 +167,32 @@ label {
   object-fit: contain;
 }
 
-/* a busca pega todo o espaço disponível */
-.nav-search {
-  flex: 1;          /* ocupa o resto */
-  width: auto;      /* não limita */
-  min-width: 280px; /* opcional, evita ficar muito pequena */
+.nav-tabs {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0 2rem;
+  background: rgba(255, 255, 255, 0.72);
+  border-bottom: 1px solid var(--border-soft);
+  backdrop-filter: blur(10px);
 }
 
 .nav-tabs-left {
   display: flex;
   gap: 1.5rem;
+  flex: 0 0 auto;
+  flex-wrap: wrap;
 }
 
 .nav-search {
+  flex: 1;
+  width: auto;
+  min-width: 280px;
   width: min(520px, 100%);
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
+  border: 1px solid var(--border-input);
+  border-radius: var(--radius-sm);
   padding: 0.8rem 0.9rem;
-  background: white;
-}
-
-.logo-button {
-  background: transparent;
-  color: #111827;
-  padding: 0;
-  text-align: left;
-  font-size: 1.4rem;
-  font-weight: 700;
+  background: rgba(255, 255, 255, 0.88);
 }
 
 .search-input {
@@ -148,18 +205,38 @@ label {
   align-items: center;
 }
 
-.nav-tabs {
-  display: flex;
-  gap: 1.5rem;
-  padding: 0 2rem;
-  background: white;
-  border-bottom: 1px solid #e5e7eb;
+.nav-tabs a {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.9rem 0.75rem;
+  color: var(--text-soft);
+  border-bottom: 2px solid transparent;
+  border-radius: 10px;
+  transition: transform 160ms ease, background-color 160ms ease, box-shadow 160ms ease, opacity 160ms ease, color 160ms ease;
 }
 
-.nav-tabs a {
-  padding: 1rem 0;
-  color: #6b7280;
-  border-bottom: 2px solid transparent;
+.nav-tabs a:hover {
+  transform: translateY(-2px);
+  background-color: rgba(17, 24, 39, 0.06);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+  opacity: 0.95;
+}
+
+.nav-tabs a.active {
+  box-shadow: none;
+  transform: none;
+}
+
+.nav-tabs a[aria-current="page"] {
+  background: var(--brand-primary);
+  color: #f9fafb;
+  box-shadow: none;
+  opacity: 1;
+  transform: none;
+}
+
+.nav-tabs a[aria-current="page"]:hover {
+  background: var(--brand-primary-strong);
 }
 
 .page-container {
@@ -173,15 +250,34 @@ label {
 .detail-card,
 .filters-panel,
 .feedback-box,
-.auth-card {
-  background: white;
-  border-radius: 16px;
-  border: 1px solid #e5e7eb;
+.auth-card,
+.book-card {
+  background: var(--bg-surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(10px);
 }
 
 .hero-card {
   padding: 2rem;
   margin-bottom: 1.5rem;
+  background:
+    linear-gradient(135deg, rgba(15, 118, 110, 0.10), rgba(180, 83, 9, 0.10)),
+    rgba(255, 255, 255, 0.82);
+  box-shadow: var(--shadow-card);
+}
+
+.hero-card h1 {
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  line-height: 1.05;
+  margin-bottom: 0.75rem;
+}
+
+.hero-card p {
+  color: var(--text-soft);
+  max-width: 720px;
+  font-size: 1.02rem;
 }
 
 .filters-panel {
@@ -206,17 +302,23 @@ label {
 }
 
 .book-card {
-  background: white;
-  border: 1px solid #e5e7eb;
-  border-radius: 16px;
   overflow: hidden;
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.book-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 40px rgba(15, 23, 42, 0.12);
+  border-color: rgba(15, 118, 110, 0.22);
 }
 
 .book-cover,
 .detail-cover-large {
   display: grid;
   place-items: center;
-  background: linear-gradient(135deg, #e5e7eb, #f3f4f6);
+  background:
+    radial-gradient(circle at top, rgba(15, 118, 110, 0.18), transparent 50%),
+    linear-gradient(135deg, #e8f3f1, #f7efe5);
 }
 
 .book-cover {
@@ -227,7 +329,7 @@ label {
 .detail-cover-large {
   min-height: 360px;
   font-size: 5rem;
-  border-radius: 16px;
+  border-radius: var(--radius-lg);
 }
 
 .book-info {
@@ -249,6 +351,21 @@ label {
   gap: 0.75rem;
 }
 
+.book-actions-row button {
+  transition: transform 160ms ease, filter 160ms ease, box-shadow 160ms ease;
+  will-change: transform;
+}
+
+.book-actions-row button:hover {
+  transform: translateY(-2px) scale(1.02);
+  filter: brightness(0.98);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.10);
+}
+
+.book-actions-row button:active {
+  transform: translateY(0) scale(0.99);
+}
+
 .detail-card {
   display: grid;
   grid-template-columns: 320px 1fr;
@@ -258,7 +375,7 @@ label {
 
 .detail-description,
 .muted {
-  color: #6b7280;
+  color: var(--text-soft);
 }
 
 .detail-options {
@@ -268,8 +385,23 @@ label {
   flex-wrap: wrap;
 }
 
+.detail-options button {
+  transition: transform 160ms ease, filter 160ms ease, box-shadow 160ms ease;
+  will-change: transform;
+}
+
+.detail-options button:hover {
+  transform: translateY(-2px);
+  filter: brightness(0.98);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.10);
+}
+
+.detail-options button:active {
+  transform: translateY(0);
+}
+
 .detail-options button.active {
-  background: #111827;
+  background: var(--dark-button);
   color: white;
 }
 
@@ -294,7 +426,7 @@ label {
   justify-content: space-between;
   gap: 1rem;
   padding: 1rem 0;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid var(--border-default);
 }
 
 .summary-line.total {
@@ -309,10 +441,21 @@ label {
   gap: 1rem;
 }
 
+.checkout-form button[type="submit"] {
+  transition: background-color 160ms ease, transform 160ms ease, box-shadow 160ms ease, filter 160ms ease;
+}
+
+.checkout-form button[type="submit"]:hover:not(:disabled) {
+  background: var(--success);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-hover);
+}
+
 .order-box {
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--border-default);
   border-radius: 12px;
   padding: 0 1rem;
+  background: rgba(255, 255, 255, 0.5);
 }
 
 .history-table {
@@ -325,7 +468,7 @@ label {
 .history-table td {
   text-align: left;
   padding: 0.9rem;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid var(--border-default);
 }
 
 .feedback-box {
@@ -347,73 +490,32 @@ label {
   gap: 0.8rem;
 }
 
+.auth-card h1 {
+  font-size: 2rem;
+  color: var(--text-strong);
+}
+
+.auth-card p {
+  color: var(--text-soft);
+}
+
 .footer {
   padding: 2rem;
   text-align: center;
-  color: #6b7280;
+  color: var(--text-soft);
 }
 
-/* Hover/animação para itens do menu superior direito */
+/* Header actions */
 .header-actions a,
 .header-actions button {
   transition: transform 160ms ease, opacity 160ms ease, background-color 160ms ease, box-shadow 160ms ease;
   border-radius: 10px;
 }
 
-.header-actions a:hover,
-.header-actions button:hover {
-  transform: translateY(-2px);
-  opacity: 0.92;
-  background-color: rgba(0,0,0,0.05);
-}
-
-/* Hover/animação para botões de Comprar/Alugar */
-.book-actions-row button {
-  transition: transform 160ms ease, filter 160ms ease, box-shadow 160ms ease;
-  will-change: transform;
-}
-
-.book-actions-row button:hover {
-  transform: translateY(-2px) scale(1.02);
-  filter: brightness(0.98);
-  box-shadow: 0 8px 16px rgba(0,0,0,0.10);
-}
-
-.book-actions-row button:active {
-  transform: translateY(0) scale(0.99);
-}
-
-/* Botão Remover no carrinho (menor e vermelho) */
-.cart-item button.remove {
-  background: #e53935;
-  padding: 0.35rem 0.55rem;
-  font-size: 0.8rem;
-  border-radius: 8px;
-}
-
-.cart-item button.remove:hover {
-  filter: brightness(0.95);
-  transform: translateY(-1px);
-}
-
-/* Botão checkout em verde */
-button.checkout {
-  background: #2e7d32;
-}
-
-button.checkout:hover {
-  filter: brightness(0.97);
-  transform: translateY(-1px);
-  box-shadow: 0 10px 18px rgba(0,0,0,0.12);
-}
-
-/* Menu superior direito: animação no hover */
 .header-actions a {
   display: inline-flex;
   align-items: center;
   padding: 0.55rem 0.75rem;
-  border-radius: 10px;
-  transition: transform 160ms ease, background-color 160ms ease, box-shadow 160ms ease, opacity 160ms ease;
 }
 
 .header-actions a:hover {
@@ -423,91 +525,20 @@ button.checkout:hover {
   opacity: 0.95;
 }
 
-/* Botão "Sair" (ghost-button) também com animação */
-.header-actions button {
-  transition: transform 160ms ease, filter 160ms ease, box-shadow 160ms ease;
-}
-
 .header-actions button:hover {
   transform: translateY(-2px);
   filter: brightness(0.98);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
 }
 
-/* =========================
-   Header (menu superior direito) - hover
-========================= */
-.header-actions a {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.55rem 0.75rem;
-  border-radius: 10px;
-  transition: transform 160ms ease, background-color 160ms ease, box-shadow 160ms ease, opacity 160ms ease;
-}
-
-.header-actions a:hover {
-  transform: translateY(-2px);
-  background-color: rgba(17, 24, 39, 0.06);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
-  opacity: 0.95;
-}
-
-.header-actions button {
-  transition: transform 160ms ease, filter 160ms ease, box-shadow 160ms ease;
-}
-
-.header-actions button:hover {
-  transform: translateY(-2px);
-  filter: brightness(0.98);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
-}
-
-/* =========================
-   Botões Comprar/Alugar (cards do catálogo) - hover
-========================= */
-.book-actions-row button {
-  transition: transform 160ms ease, filter 160ms ease, box-shadow 160ms ease;
-  will-change: transform;
-}
-
-.book-actions-row button:hover {
-  transform: translateY(-2px) scale(1.02);
-  filter: brightness(0.98);
-  box-shadow: 0 8px 16px rgba(0,0,0,0.10);
-}
-
-.book-actions-row button:active {
-  transform: translateY(0) scale(0.99);
-}
-
-/* =========================
-   Botões Comprar/Alugar (detail page) - hover
-========================= */
-.detail-options button {
-  transition: transform 160ms ease, filter 160ms ease, box-shadow 160ms ease;
-  will-change: transform;
-}
-
-.detail-options button:hover {
-  transform: translateY(-2px);
-  filter: brightness(0.98);
-  box-shadow: 0 8px 16px rgba(0,0,0,0.10);
-}
-
-.detail-options button:active {
-  transform: translateY(0);
-}
-
-/* =========================
-   Carrinho: Remover menor e vermelho
-========================= */
+/* Cart buttons */
 .cart-item button.remove {
-  background: #e53935;
+  background: var(--danger);
   color: #fff;
   border: 0;
   padding: 0.35rem 0.55rem;
   font-size: 0.8rem;
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   transition: transform 140ms ease, filter 140ms ease;
 }
 
@@ -520,11 +551,9 @@ button.checkout:hover {
   transform: translateY(0);
 }
 
-/* =========================
-   Carrinho: checkout verde
-========================= */
+/* Checkout button */
 button.checkout {
-  background: #2e7d32;
+  background: var(--success);
   color: #fff;
   transition: transform 160ms ease, filter 160ms ease, box-shadow 160ms ease;
 }
@@ -532,7 +561,7 @@ button.checkout {
 button.checkout:hover {
   filter: brightness(0.97);
   transform: translateY(-1px);
-  box-shadow: 0 10px 18px rgba(0,0,0,0.12);
+  box-shadow: var(--shadow-hover);
 }
 
 button.checkout:active {
@@ -542,7 +571,7 @@ button.checkout:active {
 .checkout-actions {
   display: flex;
   align-items: center;
-  justify-content: space-between; /* empurra o link pra direita */
+  justify-content: space-between;
   gap: 14px;
   margin-top: 12px;
 }
@@ -554,81 +583,69 @@ button.checkout:active {
   border-radius: 10px;
 }
 
-/* NavTabs (Catálogo / Minha Biblioteca / Histórico / Minha Conta) - hover/animação */
-.nav-tabs a {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.9rem 0.75rem; /* mantém altura do tab */
-  
-  transition: transform 160ms ease, background-color 160ms ease, box-shadow 160ms ease, opacity 160ms ease;
-}
-
-.nav-tabs a:hover {
-  transform: translateY(-2px);
-  background-color: rgba(17, 24, 39, 0.06);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
-  opacity: 0.95;
-}
-
-/* mantém o underline do ativo funcionando */
-.nav-tabs a.active {
-  box-shadow: none;
-  transform: none;
-}
-
-/* item ativo (rota atual) */
-.nav-tabs a[aria-current="page"] {
-  background: #5c6675;   /* cinza escuro */
-  color: #f9fafb;        /* texto claro */
-  box-shadow: none;
-  opacity: 1;
-  transform: none;
-}
-
-/* opcional: hover do ativo levemente mais claro */
-.nav-tabs a[aria-current="page"]:hover {
-  background: #4b5563;
-}
-
-/* Auth dividido: esquerda ~35%, direita restante */
+/* Auth layout */
 .auth-split {
   min-height: 100vh;
   display: grid;
   grid-template-columns: 35% 65%;
-  background: #f5f5f5;
+  background:
+    radial-gradient(circle at left top, rgba(15, 118, 110, 0.18), transparent 38%),
+    radial-gradient(circle at right bottom, rgba(180, 83, 9, 0.14), transparent 28%),
+    linear-gradient(135deg, #f8f5ef 0%, #f3ede3 100%);
 }
 
 .auth-left {
+  position: relative;
   display: grid;
-  align-content: start;      /* não fica centralizado */
+  align-content: start;
   justify-items: center;
   gap: 14px;
   padding: 2rem 1.5rem;
-  background: white;
-  border-right: 1px solid #e5e7eb;
+  background:
+    linear-gradient(rgba(248, 245, 239, 0.58), rgba(248, 245, 239, 0.70)),
+    url("/library-bg.jpg") center/cover no-repeat;
+  border-right: 1px solid var(--border-soft);
+  overflow: hidden;
+}
+
+.auth-left::before {
+  content: "";
+  position: absolute;
+  inset: 40px;
+  border-radius: 28px;
+  background: linear-gradient(135deg, rgba(15, 118, 110, 0.16), rgba(180, 83, 9, 0.12));
+  filter: blur(10px);
+  z-index: 0;
+}
+
+.auth-left > * {
+  position: relative;
+  z-index: 1;
 }
 
 .auth-left img {
   width: min(220px, 70%);
   height: auto;
   object-fit: contain;
-  margin-top: 10vh;          /* desce um pouco sem ficar “no meio” */
+  margin-top: 10vh;
+  filter: drop-shadow(0 12px 22px rgba(15, 23, 42, 0.14));
 }
 
 .auth-left .auth-slogan {
   max-width: 320px;
   text-align: center;
-  color: #374151;
-  line-height: 1.4;
-  font-weight: 600;
+  color: #183153;
+  line-height: 1.35;
+  font-weight: 700;
+  font-size: 1.7rem;
 }
 
 .auth-left .auth-sub {
   max-width: 320px;
   text-align: center;
-  color: #6b7280;
-  line-height: 1.45;
-  font-size: 0.95rem;
+  color: var(--text-soft);
+  line-height: 1.5;
+  font-size: 0.96rem;
 }
 
 .auth-right {
@@ -639,23 +656,32 @@ button.checkout:active {
 
 .auth-right .auth-card {
   width: min(100%, 420px);
+  background: rgba(255, 255, 255, 0.76);
+  border: 1px solid var(--border-soft);
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.12);
+  backdrop-filter: blur(12px);
 }
 
-/* Checkout: botão "Finalizar pedido" fica verde no hover */
-.checkout-form button[type="submit"]:hover:not(:disabled) {
-  background: #2e7d32;
+/* Auth pills, caso você já tenha adicionado no JSX */
+.auth-highlight {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.65rem;
+  max-width: 360px;
 }
 
-.checkout-form button[type="submit"] {
-  transition: background-color 160ms ease, transform 160ms ease, box-shadow 160ms ease, filter 160ms ease;
+.auth-pill {
+  padding: 0.5rem 0.85rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  color: #234;
+  font-size: 0.9rem;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.06);
 }
 
-.checkout-form button[type="submit"]:hover:not(:disabled) {
-  background: #2e7d32;
-  transform: translateY(-1px);
-  box-shadow: 0 10px 18px rgba(0,0,0,0.12);
-}
-
+/* Admin forms */
 .admin-book-form {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -673,17 +699,28 @@ button.checkout:active {
   justify-content: flex-end;
 }
 
-/* Admin Purchases buttons */
+/* Small buttons */
 .btn-small {
   padding: 0.45rem 0.6rem;
   font-size: 0.85rem;
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
 }
 
-.btn-confirm { background: #2e7d32; }
-.btn-fail { background: #b45309; }      /* laranja/âmbar escuro */
-.btn-refund { background: #e53935; }
-.btn-edit { background: #374151; }
+.btn-confirm {
+  background: var(--success);
+}
+
+.btn-fail {
+  background: var(--warning);
+}
+
+.btn-refund {
+  background: var(--danger);
+}
+
+.btn-edit {
+  background: var(--dark-muted);
+}
 
 .btn-confirm:hover,
 .btn-fail:hover,
@@ -693,14 +730,8 @@ button.checkout:active {
   transform: translateY(-1px);
 }
 
-.btn-small {
-  padding: 0.45rem 0.6rem;
-  font-size: 0.85rem;
-  border-radius: 8px;
-}
-
 .btn-danger {
-  background: #e53935;
+  background: var(--danger);
   color: #fff;
   transition: transform 160ms ease, filter 160ms ease, box-shadow 160ms ease;
 }
@@ -708,14 +739,14 @@ button.checkout:active {
 .btn-danger:hover {
   filter: brightness(0.95);
   transform: translateY(-1px);
-  box-shadow: 0 10px 18px rgba(0,0,0,0.12);
+  box-shadow: var(--shadow-hover);
 }
 
 .btn-danger:active {
   transform: translateY(0);
 }
 
-/* Badges (Status) */
+/* Badges */
 .badge {
   display: inline-flex;
   align-items: center;
@@ -729,61 +760,25 @@ button.checkout:active {
 .badge-success {
   background: rgba(46, 125, 50, 0.12);
   border-color: rgba(46, 125, 50, 0.25);
-  color: #2e7d32;
+  color: var(--success);
 }
 
 .badge-warning {
   background: rgba(180, 83, 9, 0.12);
   border-color: rgba(180, 83, 9, 0.25);
-  color: #b45309;
+  color: var(--warning);
 }
 
 .badge-danger {
   background: rgba(229, 57, 53, 0.12);
   border-color: rgba(229, 57, 53, 0.25);
-  color: #e53935;
+  color: var(--danger);
 }
 
 .badge-muted {
   background: rgba(107, 114, 128, 0.12);
   border-color: rgba(107, 114, 128, 0.25);
-  color: #6b7280;
-}
-
-/* Admin Purchases buttons */
-.btn-small {
-  padding: 0.45rem 0.6rem;
-  font-size: 0.85rem;
-  border-radius: 8px;
-}
-
-.btn-confirm { background: #2e7d32; }
-.btn-fail { background: #b45309; }
-.btn-refund { background: #e53935; }
-.btn-edit { background: #374151; }
-
-/* Animação padrão para TODOS os botões */
-button {
-  transition: transform 160ms ease, filter 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
-  will-change: transform;
-}
-
-button:hover:not(:disabled) {
-  transform: translateY(-2px);
-  filter: brightness(0.98);
-  box-shadow: 0 10px 18px rgba(0,0,0,0.12);
-}
-
-button:active:not(:disabled) {
-  transform: translateY(0);
-  box-shadow: none;
-}
-
-button:disabled {
-  cursor: not-allowed;
-  opacity: 0.6;
-  box-shadow: none;
-  transform: none;
+  color: var(--text-soft);
 }
 
 @media (max-width: 900px) {
@@ -799,5 +794,23 @@ button:disabled {
 
   .nav-tabs {
     overflow-x: auto;
+  }
+
+  .auth-split {
+    grid-template-columns: 1fr;
+  }
+
+  .auth-left {
+    border-right: 0;
+    border-bottom: 1px solid var(--border-soft);
+    min-height: 280px;
+  }
+
+  .auth-left img {
+    margin-top: 2rem;
+  }
+
+  .auth-left .auth-slogan {
+    font-size: 1.45rem;
   }
 }

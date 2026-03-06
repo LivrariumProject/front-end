@@ -36,6 +36,11 @@ export function LoginPage({ onLogin }: LoginPageProps) {
         <div className="auth-sub">
           Explore o catálogo, compre ou alugue livros digitais e acompanhe tudo na sua biblioteca.
         </div>
+        <div className="auth-highlight">
+          <span className="auth-pill">Leitura digital</span>
+          <span className="auth-pill">Compra e aluguel</span>
+          <span className="auth-pill">Sua biblioteca pessoal</span>
+        </div>
       </div>
 
       <div className="auth-right">
